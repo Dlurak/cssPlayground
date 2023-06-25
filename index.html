@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* This will be filled by the js */
+    </style>
+    <style>
+        textarea {
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+        }
+    </style>
+
+    <title>CSS Playground</title>
+</head>
+<body>
+    <header>
+        <textarea name="css" id="css" cols="30" rows="10"></textarea>
+    </header>
+    <main>
+        <nav>
+            <ul id="navbarList">
+                
+            </ul>
+        </nav>
+
+        <h1 id="h1">My website</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+
+
+        <section>
+            <h2 id="h21">Text</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit tenetur accusantium velit fuga consequatur aut illo, nam unde earum deserunt sint ab iusto laudantium, distinctio asperiores reiciendis nobis pariatur. Minima fugit deleniti error corporis, quaerat suscipit quod laborum nisi quasi, odio, laudantium fuga voluptatum odit quis. Corrupti, dignissimos! Deleniti culpa laborum ut recusandae at fuga quibusdam animi nesciunt beatae cumque fugiat non officia soluta veritatis incidunt hic, nobis ab consectetur dolores inventore obcaecati voluptates illum? Enim possimus animi sapiente est quod. Nostrum incidunt laudantium nemo repudiandae atque? Magni, doloribus facilis. Ab non architecto suscipit molestias vero? Obcaecati omnis modi, eveniet vero perspiciatis quam ullam cumque vitae repellat dolorum quasi nostrum impedit earum corporis temporibus, labore soluta quisquam sequi. Velit molestias harum adipisci eaque ad nulla nam nisi suscipit dolor ullam, mollitia sequi tempora, ratione culpa sed, corporis deserunt labore soluta voluptatem? Expedita consequuntur illo reprehenderit cumque esse, modi neque obcaecati reiciendis at culpa iusto et exercitationem provident sunt earum qui ex minima incidunt, eius quas necessitatibus quae, hic delectus eligendi. Voluptate magni blanditiis nesciunt repellat ex distinctio aperiam corrupti animi vel neque. Vero illo nam sapiente libero? Est assumenda veniam hic, soluta nesciunt ipsam fugit pariatur beatae velit non minus.</p>
+            <img src="https://th.bing.com/th/id/OIP.yLPjVKt5LhSr4-ZY1ak8sgHaFW?pid=ImgDet&rs=1" alt="Just a image">
+        </section>
+        <section>
+            <h2 id="h22">Now with a table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Smith</td>
+                        <td>76</td>
+                    </tr>
+                    <tr>
+                        <td>Jane</td>
+                        <td>Doe</td>
+                        <td>32</td>
+                    </tr>
+                    <tr>
+                        <td>Nancy</td>
+                        <td>Wheeler</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>Mike</td>
+                        <td>Wheeler</td>
+                        <td>12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2 id="h23">Now some lists</h2>
+            <ol>
+                <li>First item</li>
+                <li>Second item</li>
+                <li>Third item</li>
+                <li>
+                    <ul>
+                        <li>First sub item</li>
+                        <li>Second sub item</li>
+                        <li>
+                            <ol>
+                                <li>First sub sub item</li>
+                                <li>Second sub sub item</li>
+                                <li>Third sub sub item</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h2 id="h24">At last a form</h2>
+            <form>
+                <span>
+                    <label for="username">Username</label>
+                    <input type="name" name="username" placeholder="Dlurak">
+                </span>
+                <span>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                </span>
+                <span>
+                    <input type="submit" value="Login (Nothing will happen)">
+                </span>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        let navbarList = document.getElementById("navbarList");
+        let headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+        for (let i = 0; i < headings.length; i++) {
+            // create a list item
+            let listItem = document.createElement("li");
+            // create a link
+            let link = document.createElement("a");
+            // set the link text to the heading text
+            link.innerText = headings[i].innerText;
+            // set the link href to the heading id
+            link.href = "#" + headings[i].id;
+            // append the link to the list item
+            listItem.appendChild(link);
+            // append the list item to the navbar list
+            navbarList.appendChild(listItem);
+        }
+
+
+        let textareaElement = document.getElementById("css");
+        let style = document.getElementsByTagName("style")[0];
+
+        if (localStorage.getItem('textareaDefaultStyles') !== null) {
+            var textareaDefaultStyles = JSON.parse(localStorage.getItem('textareaDefaultStyles'));
+        } else {
+            var textareaDefaultStyles = JSON.stringify(window.getComputedStyle(textareaElement));
+            localStorage.setItem('textareaDefaultStyles', textareaDefaultStyles);
+        }
+
+        for (let key in textareaDefaultStyles) {
+            textareaElement.style[key] = textareaDefaultStyles[key];
+        }
+
+        if (localStorage.getItem("css") !== null) {
+            textareaElement.value = localStorage.getItem("css");
+            style.innerHTML = textareaElement.value;
+        } else {
+            localStorage.setItem("css", textareaElement.value);
+        }
+
+        textareaElement.addEventListener("input", function() {
+            style.innerHTML = textareaElement.value;
+            localStorage.setItem("css", textareaElement.value);
+        });
+    </script>
+</body>
+</html>
