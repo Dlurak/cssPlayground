@@ -16,6 +16,7 @@ Whatever you type in will be stored in the localstorage, so you can come back to
 }
 ```
 Also hides the textarea, so you can't undo it. If you do this, you will have to clear your localstorage to get it back.
+This is because this also applies to `body`.
 
 ## TODO
 
